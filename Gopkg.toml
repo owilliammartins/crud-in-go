@@ -1,0 +1,14 @@
+required = ["github.com/labstack/echo"]
+
+
+[[constraint]]
+  name = "github.com/labstack/echo"
+  version = "3.2.5"
+
+[[constraint]]
+  name = "upper.io/db.v3"
+  version = "3.5.0"
+
+[[constraint]]
+  name = "github.com/go-sql-driver/mysql"
+  version = "1.3"

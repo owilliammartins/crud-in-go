@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %} {{titulo}} {% endblock %}
+
+{% block body %}
+
+
+
+<div class="container">
+    <div class="jumbotron" style="margin-top: 20px;">
+        <div class="container">
+            <h2 class="text-center" >Lista de usuários</h2>
+            
+            <!-- <a href="/v1/insert" type="button" class="btn btn-sucess">Novo usuário</a>  -->
+            <div class="container">
+                <button type="button" class="btn btn-success">
+                    <a href="/add">Novo usuário</a>
+                </button>
+            </div>            
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for usuario in usuarios %}
+                        <tr id="usuario-row-{{usuario.ID}}">
+                            <td>{{usuario.ID}}</td>
+                            <td>{{usuario.Nome}}</td>
+                            <td>{{usuario.Email}}</td>
+                            <td>
+                                <a class="btn btn-danger" font-family: 'Roboto', sans-serif;   onclick="deletarUsuario('{{usuario.ID}}')" style="margin-right: 5px">
+                                    <i> Excluir</i>
+                                    <!-- <i class="fa fa-trash-o fa-lg"> Excluir</i> -->
+                                </a>
+                                <a class="btn btn-warning" font-family: 'Roboto', sans-serif;  href="/atualizar/{{usuario.ID}}">
+                                    <i> Editar</i>
+                                    <!-- <i class="fa fa-trash-o fa-lg"> Excluir</i> -->
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </di
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+{% block js %}
+
+<script>
+    function deletarUsuario(pk){
+        $.ajax({
+            url:"/v1/delete/" + pk,
+            method: "delete",
+            success: function(){
+                $("#usuario-row-" + pk).remove()
+            }
+        })
+    }
+</script>
+
+{% endblock %}
+

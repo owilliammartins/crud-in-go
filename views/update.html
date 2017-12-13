@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} Atualizar cadastro {% endblock %}
+
+{% block body %}
+
+
+
+<div class="container">
+    <div class="jumbotron" style="margin-top: 20px;">
+        <div class="container">
+            <h2 class="text-center" >Atualizar cadastro</h2>
+            
+            <form class="form-horizontal" id="usuario-form" role="form">
+                    <!-- campo nome -->
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <input type="text" class="form-control" id="nome" name=nome value="{{usuario.Nome}}" required>
+                        </div>
+                    </div>
+                    <!-- campo email -->
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <input type="text" class="form-control" id="email" name=email value="{{usuario.Email}}" required>
+                        </div>
+                    </div>
+
+                    <!-- botão de confirmação -->
+                    <div class="form-group">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <button type="submit" onclick="atualizar('{{usuario.ID}}')" class="btn btn-warning" btn-block>Confirmar</button>
+                        </div>
+                    </div>
+            </form>
+            
+
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    function atualizar(pk){
+        $.ajax({
+            url: "/v1/update/" + pk,
+            method: "put",
+            dataType: "json",
+            data: $("#usuario-form").serialize(),
+            complete: function(){
+                window.location.href = '/';
+            }
+        });
+    }
+</script>
+
+{% endblock %}
+
+
